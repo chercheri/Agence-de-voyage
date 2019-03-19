@@ -1,0 +1,51 @@
+{% extends 'baseadmin.html.twig' %}
+
+{% block title %}Etape index{% endblock %}
+
+{% block body %}
+    <h1>Etape index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumeroEtape</th>
+                <th>VilleEtape</th>
+                <th>NombreJours</th>
+                <th>Circuit</th>
+                <th>hotelEtape</th>
+                <th>url_img</th>
+                <th>description/th>
+                <th>actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for etape in etapes %}
+            <tr>
+                <td>{{ etape.id }}</td>
+                <td>{{ etape.numeroEtape }}</td>
+                <td>{{ etape.villeEtape }}</td>
+                <td>{{ etape.nombreJours }}</td>
+                <td>{{ etape.circuit }}</td>
+                <td>{{ etape.hotelEtape }}</td>
+                <td>{{ etape.imgEtape }}</td>
+                <td>{{ etape.description }}</td>
+                <td>
+                    <a href="{{ path('admin_etape_show', {'id': etape.id}) }}">show</a>
+                    <a href="{{ path('admin_etape_edit', {'id': etape.id}) }}">edit</a>
+                    <a href="{{ path('admin_etape_delete', {'id': etape.id}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_etape_new') }}">Create new</a>
+{% endblock %}
+{% block footer %}
+{% endblock %}

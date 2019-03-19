@@ -1,0 +1,45 @@
+{# templates/home.html.twig #}
+
+{# Template de la page d'accueil de l'application #}
+
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} - Welcome{% endblock %}
+
+{% block main %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+    	<h1 class="circuitTitre" style="letter-spacing: 3px">VoyageTodo   Les Prix Les Plus Doux !!</h1>      
+    </div>
+</div>
+
+
+<img src="https://www.monde-du-voyage.com/images/monde-du-voyage.jpg" alt="Voy" width="500" height="333" style="    display: block;    margin-left: auto;    margin-right: auto;    width: 50%;">
+
+<div style="text-align:center;margin-top:0.5%">
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    			<a role="button" type="button" href="{{ path('fos_user_security_logout')}}" class="btn btn-info btn-lg reserv">Se déconnecter</a>
+    			{% else %}
+    			 <a role="button" type="button" href="{{ path('fos_user_security_login')}}" class="btn btn-info btn-lg reserv">Se connecter</a>
+				{% endif %}
+    			<a role="button" type="button" href="{{ path('front_home')}}" class="btn btn-info btn-lg reserv" style="margin-left:2%">Catalogue</a>
+
+
+{% endblock %} {# main #}
+
+{% block footer %}
+	<div class="card text-center" style="margin-top:1%">
+  		<div class="card-header">VoyageTodo l'agence de voyage numéro 1 à TSP !!</div>
+  		<div class="card-body">
+    		<h5 class="card-title">contact: +33 06 24 15 23 / voyagetoto@tsp.com </h5>
+    		<p class="card-text">9 rue Charles Fourier, Evry Cedex, 91000</p>
+    		<a href="https://www.facebook.com" class="btn btn-primary">Facebook</a>
+    		<a href="https://www.youtube.com" class="btn btn-danger">Youtube</a>
+    		<a href="https://www.Linkedin.com" class="btn btn-primary">LinkedIn</a>
+    		
+  		</div>
+  		<div class="card-footer text-muted"><i class="far fa-copyright"> All rights reserved.</i></div>
+	</div>
+</body>
+	{% endblock %} {# footer #}

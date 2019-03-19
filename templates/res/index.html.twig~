@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Res index{% endblock %}
+
+{% block body %}
+    <h1>Res index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>NumTel</th>
+                <th>Circuit</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for re in res %}
+            <tr>
+                <td>{{ re.id }}</td>
+                <td>{{ re.nom }}</td>
+                <td>{{ re.prenom }}</td>
+                <td>{{ re.email }}</td>
+                <td>{{ re.numTel }}</td>
+                <td>{{ re.ProgCir }}</td>
+                <td>
+                    <a href="{{ path('res_show', {'id': re.id}) }}">show</a>
+                    <a href="{{ path('res_edit', {'id': re.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

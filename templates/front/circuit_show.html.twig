@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}circuit {{circuit_prog.circuit.description}}{% endblock %} 
+
+{% block intro %}
+	<div class="jumbotron jumbotron-fluid">
+  		<div class="container">
+    		<h1 class="circuitTitre">Départ en groupe en {{ circuit_prog.circuit.paysDepart }}!!</h1>      
+    		<p class="introduction">Ce circuit va durer {{ circuit_prog.circuit.dureeCircuit }} jours à partir de {{ circuit_prog.dateDepart|date('d-m-Y') }} à seulement {{ circuit_prog.prix }} euros en passant par {{ circuit_prog.circuit.nbrVille }} villes différentes.</p>
+    			
+    		<p class="introduction">Il ne reste que {{ circuit_prog.nombrePersonnes}} places. Réservez vite pour vivre une expérience inoubliable !!</p>
+
+			    		
+    		<div style="text-align:center;">
+    			{% if is_granted ('ROLE_ADMIN') %}
+    			<a role="button" type="button" href="{{ path('admin_programmation_circuit_edit', {id: circuit_prog.id}) }}" class="btn btn-warning btn-lg reserv">Modifier</a>
+    			{% endif %}
+    			{% if circuit_prog.nombrePersonnes >0 %}	
+    			<a role="button" type="button" href="{{ path('res_new', {id: circuit_prog.id}) }}" class="btn btn-warning btn-lg reserv">Réservation</a>
+    			{% else %}
+    			<a role="button" type="button" onClick="Message()" class="btn btn-disabled btn-lg reserv">Réservation</a>
+    			<script type="text/javascript">
+   				function Message() {
+       				var msg="Dommage il ne reste plus de places ";
+       				alert(msg);
+   				}
+				</script>
+    			{% endif %}
+    		</div>
+  		</div>
+	</div>
+{%  endblock  %}
+{% block main %}
+<div style="text-align:center";>
+<div class="row" style="width:80%; margin-left:auto;margin-right:auto; border-top:3px solid;">
+    {%  for etape in circuit_prog.circuit.etapes%}
+    	<div class="clo-xs-1" style="margin-left:5%;margin-top:2.5%;margin-bottom:2.5%">
+        	<div class="card">
+        			<div class="containerI"> 
+             		<img src="{{ etape.imgEtape }}" alt="img" class="image" style="width:300px;height:300px;">
+             		<div class="middle" style="margin-left:50%;max-width:300px;max-height:300px">
+  						</div>
+  					</div>
+         			<div>
+                	<h4><b>{{ etape.villeEtape}}</b></h4> 
+            		<p>{{ etape.nombreJours }} jour(s)</p> 
+            		<p>hotel: {{ etape.hotelEtape }} </p>
+					</div>
+			</div>
+        </div>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

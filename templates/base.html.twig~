@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+        	<!-- Bootstrap -->
+			<link rel="stylesheet" href="/css/bootstrap.min.css">
+			<link rel="stylesheet" href="/css/front_style.css">
+			<!-- font -->
+			 <link href="https://fonts.googleapis.com/css?family=Pattaya" rel="stylesheet">
+			 <link href="https://fonts.googleapis.com/css?family=Mali" rel="stylesheet">
+			 <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave" rel="stylesheet">
+			 
+			<!-- icons -->
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.4.2/css/all.css' integrity='sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns' crossorigin='anonymous'>
+			<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        {% endblock %}
+    </head>
+<body class="Degrade">
+{% block menu %}
+		{# Collect the nav links, forms, and other content for toggling #}
+                <nav class="navbar navbar-inverse">
+                    {{ knp_menu_render('main', {'currentClass': 'active'}) }}
+                    {{ knp_menu_render('user', {'currentClass': 'active'}) }}
+                </nav>
+	{% endblock %} {# menu #}
+    {% block body %}
+	{% block slide %}{% endblock %} {#slide#}
+    {% block intro %}{% endblock %} {#intro#}
+    {% block main %}MAIN{% endblock %} {# main #}
+
+	{% endblock %} {# body #}
+
+	{% block footer %}
+	<div class="card text-center">
+  		<div class="card-header">VoyageTodo l'agence de voyage numéro 1 à TSP !!</div>
+  		<div class="card-body">
+    		<h5 class="card-title">Contact: +33 06 24 15 23 / voyagetoto@tsp.com </h5>
+    		<p class="card-text">9 rue Charles Fourier, Evry Cedex, 91000</p>
+    		<a href="https://www.facebook.com" class="btn btn-primary">Facebook</a>
+    		<a href="https://www.youtube.com" class="btn btn-danger">Youtube</a>
+    		<a href="https://www.Linkedin.com" class="btn btn-primary">LinkedIn</a>
+    		
+  		</div>
+  		<div class="card-footer text-muted"><i class="far fa-copyright"> All rights reserved.</i></div>
+	</div>
+</body>
+	{% endblock %} {# footer #}
+	
+	{% block javascripts %}
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="/js/front_show.js"></script>
+		<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	{% endblock %} {# javascripts #}
+	{% block custompage_script %}
+    {% endblock %} {# custompage_scripts #}
+</html>

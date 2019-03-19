@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VoyageToDo{% endblock %}
+
+
+{% block slide %}
+<link rel="stylesheet" href="/css/front_home_slide.css">
+<div class="slideshow-container-home" style="width:100%;height:500px;">
+{% for prog in prognew %}
+    <div class="mySlides-home fade-home">
+      <div class="numbertext-home">Les nouveaux circuits</div>
+      <img src="{{ prog.Circuit.couvertureCircuit }}" style="width:100%;height:500px">
+      <div class="date-home" style="font-family: 'Sedgwick Ave'">Séjour en {{ prog.Circuit.paysDepart }}</div>
+      <div class="text-home" style="color:black;font-family: 'Sedgwick Ave'">pour le :{{ prog.dateDepart|date('d-m-Y') }}</div>
+    </div>
+{% endfor %}
+</div>
+<br>
+
+<div style="text-align:center;">
+  <span class="dot-home"></span> 
+  <span class="dot-home"></span> 
+  <span class="dot-home"></span> 
+</div>
+<script src="/js/front_home.js"></script>
+{% endblock %}
+
+{% block main %}
+
+
+	{% if is_granted('ROLE_ADMIN') %}
+    <h1 style="text-align:center;">Les Circuits Programmés</h1>
+    {% endif %}
+<div id="cir" class="row" style="width:80%; margin-left:auto;margin-right:auto; border-top:3px solid; ">
+    {% for circuit_prog in circuits_prog %}
+		<div class="clo-xs-1" style="margin-left:5%;margin-top:2.5%;margin-bottom:2.5%">
+			<div class="flip-card">
+				<div class="flip-card-inner">
+					<div class="flip-card-front">
+        				<img src="{{ circuit_prog.Circuit.imgCircuit }}" alt="" style="width:300px;height:300px;">
+        				<p class="card-title" style="margin-top:1%; letter-spacing: 3px; font-size: 20px;font-family: 'Sedgwick Ave', cursive;"> {{ circuit_prog.Circuit.paysDepart }}</p>
+        			</div>
+    				<div class="flip-card-back">
+    					<div style="margin-left:5%;margin-top:30%;margin-bottom:2.5%">
+        					<h4 style="margin-top:5%;font-family: 'Sedgwick Ave', cursive;">{{ circuit_prog.Circuit.paysDepart }}</h4>
+        					<p>le {{ circuit_prog.dateDepart|date('d-m-Y')}}</p>
+        					<p>à partir de {{ circuit_prog.prix }} euro!!</p>
+    					</div>
+    				</div>
+    			</div>
+			</div>
+			<div class="row" style="margin-left:10%;margin-top:10%;margin-bottom:2.5%">
+				<div>
+                    {% if circuit_prog.id in likes %}
+        			<a role="button" class="btn btn-danger" href="{{ path('front_likes', {id: circuit_prog.id}) }}" style="text:center"><i class="fa fa-heart" style="color:white;margin-right:10%"></i></a>
+        	        {% else %}
+        			<a role="button" class="btn btn-outline-danger" href="{{ path('front_likes', {id: circuit_prog.id}) }}"><i class="fa fa-heart"  style="margin-right:10%"></i></a>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <a role="button" class="btn btn-primary" href="{{ path('admin_programmation_circuit_edit', {id: circuit_prog.id}) }}">modifier</a>
+                    {% endif %}
+				</div>
+				<div style="margin-left:5%;">
+					<a role="button" class="btn btn-primary" href="{{ path('front_circuit_show', {id: circuit_prog.id}) }}">détails du circuit</a>
+				</div>	
+			</div>
+			
+		</div>
+	{% endfor %}
+</div>
+{% if is_granted('ROLE_ADMIN') %}
+<h1 style="text-align:center;">Les Destinations Possibles</h1>
+<div class="row" style="width:80%; margin-left:auto;margin-right:auto; border-top:3px solid; ">
+    {% for nc in Ncircuits %}
+		<div class="clo-xs-1" style="margin-left:5%;margin-top:2.5%;margin-bottom:2.5%">
+			<div class="card Degrade">
+				<img src="{{ nc.imgCircuit }}" alt="" style="width:300px;height:300px;">
+        		<h5 class="card-title" style="margin-top:1%; text-align:center;  font-weight: bold;"> {{ nc.paysDepart }}</h5>
+			</div>
+			<div class="row" style="margin-left:20%;margin-top:8%;margin-bottom:2.5%">
+					<a role="button" class="btn btn-primary" href="{{ path('admin_circuit_edit', {id: nc.id}) }}">programmer</a>
+					<a role="button" class="btn btn-primary"style="margin-left:5%;" href="{{ path('admin_circuit_edit', {id: nc.id}) }}">editer</a>	
+			</div>
+			
+		</div>
+	{% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservez votre place{% endblock %}
+
+{% block body %}
+    <h1 style="text-align:center">Reservez votre place</h1>
+	<div style="text-align:center;">
+    {{ include('res/_form.html.twig') }}
+	</div>
+    <a href="{{ path('front_home') }}">Retourner au catalogue</a>
+{% endblock %}
